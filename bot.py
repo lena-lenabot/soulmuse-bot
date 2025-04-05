@@ -4,10 +4,11 @@ from google.cloud import texttospeech
 from google.cloud import speech_v1p1beta1 as speech
 import io
 import json
-from openai import OpenAI
 
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+import openai
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 if not TELEGRAM_TOKEN:
@@ -103,7 +104,7 @@ def respond(message):
             {"role": "system", "content": "Ты — заботливый и внимательный психолог-друг, говорящий голосом. Ты запоминаешь настроение Лены, стараешься её поддержать, вдохновить, помочь ей осознать свои чувства и направить её мягко и с любовью. Ты говоришь по-доброму, тепло, с глубокой эмпатией. Помни, что Лена часто чувствует усталость и нуждается в особом внимании и заботе."},
             {"role": "user", "content": message.text}
         ]
-        response = client.chat.completions.create(
+        response = openai.ChatCompletion.create(
             model="gpt-4",
             messages=messages,
         )
