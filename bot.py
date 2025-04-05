@@ -6,9 +6,12 @@ import io
 import json
 from openai import OpenAI
 
-TELEGRAM_TOKEN = "вставь_сюда_свой_токен"
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_key.json"
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+if not TELEGRAM_TOKEN:
+    raise ValueError("❌ TELEGRAM_TOKEN не найден в переменных окружения")
 
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
@@ -64,8 +67,6 @@ def transcribe_voice(file_path):
     except Exception as e:
         print("❌ Ошибка при распознавании речи:", e)
         return None
-
-client = OpenAI(api_key=OPENAI_API_KEY)
 
 @bot.message_handler(commands=["start"])
 def start(message):
