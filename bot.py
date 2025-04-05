@@ -9,7 +9,7 @@ import openai
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "default_token")  # Обеспечиваем, что значение по умолчанию не вызывает ошибку
 if not TELEGRAM_TOKEN:
     raise ValueError("❌ TELEGRAM_TOKEN не найден в переменных окружения")
 
@@ -129,3 +129,4 @@ def respond(message):
         bot.send_message(message.chat.id, "⚠️ Не удалось сгенерировать голосовой ответ.")
 
 print("🤖 Бот запущен. Жду сообщений...")
+bot.polling(none_stop=True)
