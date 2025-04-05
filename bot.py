@@ -6,7 +6,7 @@ import io
 import json
 from openai import OpenAI
 
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+TELEGRAM_TOKEN = "вставь_сюда_свой_токен"
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_key.json"
 
