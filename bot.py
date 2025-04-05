@@ -5,7 +5,6 @@ from google.cloud import speech_v1p1beta1 as speech
 import io
 import json
 
-
 import openai
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -108,11 +107,12 @@ def respond(message):
             model="gpt-4",
             messages=messages,
         )
+        print("🧾 Ответ от OpenAI RAW:", response)
         reply_text = response.choices[0].message.content.strip()
         print("💬 Ответ от ChatGPT:", reply_text)
     except Exception as e:
-        reply_text = "⚠️ Не удалось получить ответ от ChatGPT."
-        print("❌ Ошибка ChatGPT:", e)
+        print("❌ Исключение при запросе к OpenAI:", type(e), e)
+        reply_text = "⚠️ Не удалось получить ответ от ChatGPT. Попробуй ещё раз чуть позже."
 
     # Отправка текстового ответа
     bot.send_message(message.chat.id, reply_text)
@@ -129,4 +129,3 @@ def respond(message):
         bot.send_message(message.chat.id, "⚠️ Не удалось сгенерировать голосовой ответ.")
 
 print("🤖 Бот запущен. Жду сообщений...")
-bot.polling(none_stop=True)
