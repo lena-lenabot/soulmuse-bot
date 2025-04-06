@@ -5,6 +5,7 @@ pip install requests==2.31.0
 pip install python-dotenv==1.0.1
 pip install openai==1.14.1
 pip install google-cloud-texttospeech==2.14.1
+pip install Flask==2.2.5
 
 echo "🔄 Запускаем бота..."
 
