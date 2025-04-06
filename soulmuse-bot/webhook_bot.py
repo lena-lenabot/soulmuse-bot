@@ -1,4 +1,13 @@
 import os
+import json
+
+google_creds = os.getenv("GOOGLE_KEY_JSON")
+
+if google_creds:
+    with open("google_key.json", "w") as f:
+        f.write(google_creds)
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "google_key.json"
+
 import telebot
 from flask import Flask, request
 
