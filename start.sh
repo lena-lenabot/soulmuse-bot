@@ -9,8 +9,8 @@ then
     exit 1
 fi
 
-# Запуск бота и логирование ошибок (если есть)
-python3 bot.py 2> error.log
+# Запуск вебхукового бота (webhook_bot.py) и логирование ошибок (если есть)
+python3 webhook_bot.py 2> error.log
 
 # Проверка, завершился ли бот с ошибкой
 if [ $? -ne 0 ]; then
