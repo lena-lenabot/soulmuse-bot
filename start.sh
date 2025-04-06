@@ -15,7 +15,7 @@ then
 fi
 
 # Запуск основного Telegram-бота (webhook_bot.py) с логированием ошибок
-python3 webhook_bot.py 2> error.log
+python3 webhook_bot.py 2>&1 | tee error.log
 
 # Проверка, завершился ли бот с ошибкой
 if [ $? -ne 0 ]; then
